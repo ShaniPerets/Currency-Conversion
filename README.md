@@ -27,9 +27,17 @@ A full-stack application for currency conversion with React frontend and Node.js
    NODE_ENV=development
    ```
 
-4. Start the development server:
+4. Start the server using one of these methods:
+
+   Using Node directly:
    ```bash
-   npm run dev
+   node src/index.js
+   ```
+
+   OR using npm scripts:
+   ```bash
+   npm run dev    # for development with hot-reload
+   npm start      # for production
    ```
 
 ### Frontend Setup

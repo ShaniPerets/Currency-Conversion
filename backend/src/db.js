@@ -77,10 +77,11 @@ function updateRates(newRates) {
     const db = readDB();
     // Only update rates for currencies present in db.currencies
     db.rates = db.currencies.reduce((acc, curr) => {
-        if (newRates[curr.code]) {
-            acc[curr.code] = newRates[curr.code];
-        } else if (curr.code === 'USD') {
-            acc[curr.code] = 1; // USD base
+        if (curr.code === 'USD') {
+            acc[curr.code] = 1; // Always set USD to 1
+        } else if (newRates[curr.code]) {
+            // Invert the rate: if 1 USD = X currency, then 1 currency = 1/X USD
+            acc[curr.code] = 1 / newRates[curr.code];
         }
         return acc;
     }, {});
@@ -94,5 +95,7 @@ module.exports = {
     convertToAll,
     saveToHistory,
     getHistory,
-    updateRates
+    updateRates,
+    readDB,
+    writeDB
 }; 

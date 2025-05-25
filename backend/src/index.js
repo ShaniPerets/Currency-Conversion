@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fetch = require('node-fetch');
-const { getCurrencies, convertCurrency, convertToAll, getHistory, updateRates } = require('./db');
+const { getCurrencies, convertCurrency, convertToAll, getHistory, readDB, writeDB } = require('./db');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -68,40 +68,6 @@ app.get('/api/history', (req, res) => {
         }
         res.json(rows);
     });
-});
-
-app.post('/api/update-rates', async (req, res) => {
-    try {
-        console.log('Starting rate update...');
-        // Fetch latest rates from exchangerate.host
-        const response = await fetch('https://api.exchangerate.host/latest?base=USD');
-        const data = await response.json();
-
-        if (!data.rates) {
-            console.error('No rates received from API');
-            return res.status(500).json({ error: 'Failed to fetch rates' });
-        }
-
-        console.log('Rates received from API:', Object.keys(data.rates).length, 'currencies');
-
-        // Update rates in db.json
-        const updatedRates = updateRates(data.rates);
-        console.log('Rates updated in database:', Object.keys(updatedRates).length, 'currencies');
-
-        res.json({
-            success: true,
-            message: 'Rates updated successfully',
-            rates: updatedRates,
-            timestamp: new Date().toISOString(),
-            details: {
-                totalCurrencies: Object.keys(updatedRates).length,
-                currencies: Object.keys(updatedRates)
-            }
-        });
-    } catch (err) {
-        console.error('Error updating rates:', err);
-        res.status(500).json({ error: 'Error updating rates' });
-    }
 });
 
 // Historical conversion endpoint
@@ -171,6 +137,79 @@ app.post('/api/convert-historical', async (req, res) => {
             error: 'Error performing historical conversion',
             details: err.message
         });
+    }
+});
+
+app.post('/api/update-rates', async (req, res) => {
+    try {
+        const { date } = req.body;
+
+        if (!date) {
+            return res.status(400).json({ error: 'Date is required' });
+        }
+
+        // Validate date format (YYYY-MM-DD)
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateRegex.test(date)) {
+            return res.status(400).json({ error: 'Invalid date format. Use YYYY-MM-DD' });
+        }
+
+        console.log(`Starting rate update for ${date}...`);
+
+        // Get current database state
+        const db = readDB();
+        const ourCurrencies = db.currencies.map(c => c.code);
+
+        // Fetch rates from Frankfurter API for the specified date
+        const response = await fetch(`https://api.frankfurter.app/${date}?from=USD`);
+        const data = await response.json();
+
+        if (!data.rates) {
+            console.error('No rates received from API');
+            return res.status(500).json({ error: 'Failed to fetch rates' });
+        }
+
+        // Filter rates to only include currencies we have in our database and invert them
+        const filteredRates = {};
+
+        // Always add USD first
+        filteredRates['USD'] = 1;
+
+        // Then add other currencies
+        ourCurrencies.forEach(currency => {
+            if (currency !== 'USD' && data.rates[currency]) {
+                // Invert the rate: if 1 USD = X currency, then 1 currency = 1/X USD
+                filteredRates[currency] = 1 / data.rates[currency];
+            }
+        });
+
+        // Update rates in db.json
+        db.rates = filteredRates;
+        writeDB(db);
+
+        // Print updated rates
+        console.log(`\nUpdated exchange rates for ${date} (USD value per unit):`);
+        console.log('----------------------------------------');
+        Object.entries(filteredRates).forEach(([currency, rate]) => {
+            const currencyInfo = db.currencies.find(c => c.code === currency);
+            console.log(`${currency} (${currencyInfo.name}): ${rate.toFixed(4)} USD`);
+        });
+        console.log('----------------------------------------\n');
+
+        res.json({
+            success: true,
+            message: `Rates updated successfully to ${date}`,
+            rates: filteredRates,
+            timestamp: new Date().toISOString(),
+            date: date,
+            details: {
+                totalCurrencies: Object.keys(filteredRates).length,
+                currencies: Object.keys(filteredRates)
+            }
+        });
+    } catch (err) {
+        console.error('Error updating rates:', err);
+        res.status(500).json({ error: 'Error updating rates' });
     }
 });
 

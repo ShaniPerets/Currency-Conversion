@@ -257,3 +257,86 @@ button:hover,
 .history-multiline-result>div:last-child {
     margin-bottom: 0;
 }
+
+.update-rates-btn {
+    background: #34a853;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.update-rates-btn:hover {
+    background: #2d9249;
+}
+
+.update-rates-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.last-update {
+    margin-top: 8px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.update-info {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
+}
+
+.update-details {
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+.currency-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.currency-tag {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.historical-details {
+    margin-top: 8px;
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 1rem 1.1rem 0.7rem 1.1rem;
+    border: 1.5px solid #dadce0;
+    border-radius: 6px;
+    font-size: 1.08em;
+    background: #f8fafc;
+    color: #222;
+    font-family: 'Roboto', Arial, sans-serif;
+    transition: border 0.2s, box-shadow 0.2s;
+    margin-top: 0.2rem;
+}
+
+input[type="date"]:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px #e3f0fd;
+}
