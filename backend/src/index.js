@@ -15,18 +15,20 @@ app.use(express.json());
 app.get('/api/currencies', (req, res) => {
     getCurrencies((err, rows) => {
         if (err) {
-            res.status(500).json({ error: 'Failed to fetch currencies' });
+            res.status(500).json({ error: 'Failed to get currencies' });
             return;
         }
         res.json(rows);
     });
 });
 
+
+//single conversion endpoint
 app.post('/api/convert', (req, res) => {
     const { amount, sourceCurrency, targetCurrency } = req.body;
 
     if (!amount || !sourceCurrency || !targetCurrency) {
-        return res.status(400).json({ error: 'Missing required parameters' });
+        return res.status(400).json({ error: 'Missing parameters' });
     }
 
     convertCurrency(parseFloat(amount), sourceCurrency, targetCurrency, (err, convertedAmount) => {
@@ -43,10 +45,11 @@ app.post('/api/convert', (req, res) => {
     });
 });
 
+//convert to all currencies endpoint
 app.post('/api/convert-all', (req, res) => {
     const { amount, sourceCurrency } = req.body;
     if (!amount || !sourceCurrency) {
-        return res.status(400).json({ error: 'Missing required parameters' });
+        return res.status(400).json({ error: 'Missing parameters' });
     }
     convertToAll(parseFloat(amount), sourceCurrency, (err, results) => {
         if (err) {
@@ -61,17 +64,18 @@ app.post('/api/convert-all', (req, res) => {
     });
 });
 
+//history endpoint
 app.get('/api/history', (req, res) => {
     getHistory((err, rows) => {
         if (err) {
-            res.status(500).json({ error: 'Failed to fetch history' });
+            res.status(500).json({ error: 'Failed to get history' });
             return;
         }
         res.json(rows);
     });
 });
 
-// Historical conversion endpoint
+//historical conversion endpoint
 app.post('/api/convert-historical', async (req, res) => {
     try {
         const { amount, sourceCurrency, targetCurrency, date } = req.body;
@@ -80,17 +84,17 @@ app.post('/api/convert-historical', async (req, res) => {
 
         if (!amount || !sourceCurrency || !targetCurrency || !date) {
             console.log('Missing parameters:', { amount, sourceCurrency, targetCurrency, date });
-            return res.status(400).json({ error: 'Missing required parameters' });
+            return res.status(400).json({ error: 'Missing parameters' });
         }
 
-        // Validate date format (YYYY-MM-DD)
+        // validate date format (YYYY-MM-DD)
         const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
         if (!dateRegex.test(date)) {
             console.log('Invalid date format:', date);
-            return res.status(400).json({ error: 'Invalid date format. Use YYYY-MM-DD' });
+            return res.status(400).json({ error: 'Invalid date format' });
         }
 
-        // Fetch historical rates from Frankfurter API
+        // get historical rates from Frankfurter API
         const historicalUrl = `${exchangeRatesUrl}/${date}?from=${sourceCurrency}&to=${targetCurrency}`;
         console.log('Fetching from API:', historicalUrl);
 
@@ -159,11 +163,11 @@ app.post('/api/update-rates', async (req, res) => {
 
         console.log(`Starting rate update for ${date}...`);
 
-        // Get current database state
+        // get current database state
         const db = readDB();
         const ourCurrencies = db.currencies.map(c => c.code);
 
-        // Fetch rates from Frankfurter API for the specified date
+        // getting rates from Frankfurter API for the specified date
         const apiKey = process.env.CURRENCY_API_KEY;
         const updateRatesUrl = `${exchangeRatesUrl}/${date}?from=USD`;
         const fetchOptions = apiKey ? { headers: { 'Authorization': `Bearer ${apiKey}` } } : {};
@@ -175,33 +179,33 @@ app.post('/api/update-rates', async (req, res) => {
             return res.status(500).json({ error: 'Failed to fetch rates' });
         }
 
-        // Filter rates to only include currencies we have in our database and invert them
+        // filter rates to only include currencies we have in our db and invert them
         const filteredRates = {};
 
-        // Always add USD first
+        // always add USD first
         filteredRates['USD'] = 1;
 
-        // Then add other currencies
+        // then add other currencies
         ourCurrencies.forEach(currency => {
             if (currency === 'USD') return;
             if (data.rates[currency]) {
-                // Invert the rate: if 1 USD = X currency, then 1 currency = 1/X USD
+                // invert the rate: if 1 USD = X currency, then 1 currency = 1/X USD
                 filteredRates[currency] = 1 / data.rates[currency];
             } else if (db.rates && db.rates[currency]) {
-                // Fallback to last known rate if API does not provide it
+                // fallback to last known rate if API does not provide it
                 filteredRates[currency] = db.rates[currency];
                 console.warn(`No rate for ${currency} from API, using last known rate: ${db.rates[currency]}`);
             } else {
-                // If no previous rate, skip (will be undefined)
+                // if no previous rate, skip (will be undefined)
                 console.warn(`No rate for ${currency} from API and no previous rate available.`);
             }
         });
 
-        // Update rates in db.json
+        // update rates in db.json
         db.rates = filteredRates;
         writeDB(db);
 
-        // Print updated rates
+        // print updated rates- for debugging
         console.log(`\nUpdated exchange rates for ${date} (USD value per unit):`);
         console.log('----------------------------------------');
         Object.entries(filteredRates).forEach(([currency, rate]) => {

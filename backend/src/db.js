@@ -46,6 +46,7 @@ function convertCurrency(amount, sourceCurrency, targetCurrency, cb) {
     if (sourceRate == null || targetRate == null) {
         return cb(new Error('Currency rates not found'));
     }
+    //calculating the conversion rate according the rate of the source and target currencies to dollar
     const converted = amount * (sourceRate / targetRate);
     saveToHistory({
         type: 'single',

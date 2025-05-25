@@ -2244,6 +2244,87 @@
           "convertedAmount": 1798.51
         }
       ]
+    },
+    {
+      "id": 1748177594599,
+      "timestamp": "2025-05-25T12:53:07.894Z",
+      "type": "single",
+      "amount": 1000,
+      "sourceCurrency": "ILS",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 244.31375797233497
+      }
+    },
+    {
+      "id": 1748177599769,
+      "timestamp": "2025-05-25T12:53:17.516Z",
+      "type": "all",
+      "amount": 100,
+      "sourceCurrency": "ILS",
+      "targetCurrency": null,
+      "result": [
+        {
+          "targetCurrency": "USD",
+          "targetName": "US Dollar",
+          "convertedAmount": 27.60981805129904
+        },
+        {
+          "targetCurrency": "EUR",
+          "targetName": "Euro",
+          "convertedAmount": 24.431375797233496
+        },
+        {
+          "targetCurrency": "GBP",
+          "targetName": "British Pound",
+          "convertedAmount": 20.478202048648498
+        },
+        {
+          "targetCurrency": "JPY",
+          "targetName": "Japanese Yen",
+          "convertedAmount": 3936.6078577542175
+        },
+        {
+          "targetCurrency": "BRL",
+          "targetName": "Brazilian Real",
+          "convertedAmount": 158.12142797978962
+        },
+        {
+          "targetCurrency": "CAD",
+          "targetName": "Canadian Dollar",
+          "convertedAmount": 38.1871393467517
+        },
+        {
+          "targetCurrency": "AUD",
+          "targetName": "Australian Dollar",
+          "convertedAmount": 42.922223142549484
+        },
+        {
+          "targetCurrency": "CHF",
+          "targetName": "Swiss Franc",
+          "convertedAmount": 22.718738783511416
+        },
+        {
+          "targetCurrency": "INR",
+          "targetName": "Indian Rupee",
+          "convertedAmount": 2358.706756122477
+        },
+        {
+          "targetCurrency": "CNY",
+          "targetName": "Chinese Yuan",
+          "convertedAmount": 198.3737817167785
+        },
+        {
+          "targetCurrency": "SGD",
+          "targetName": "Singapore Dollar",
+          "convertedAmount": 35.55868466826803
+        },
+        {
+          "targetCurrency": "ZAR",
+          "targetName": "South African Rand",
+          "convertedAmount": 496.56533863441837
+        }
+      ]
     }
   ]
 }
