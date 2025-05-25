@@ -3,10 +3,11 @@ const cors = require('cors');
 const path = require('path');
 const fetch = require('node-fetch');
 const { getCurrencies, convertCurrency, convertToAll, getHistory, readDB, writeDB } = require('./db');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-
+const exchangeRatesUrl = process.env.RATES_API || 'https://api.frankfurter.app';
 app.use(cors());
 app.use(express.json());
 
@@ -90,10 +91,12 @@ app.post('/api/convert-historical', async (req, res) => {
         }
 
         // Fetch historical rates from Frankfurter API
-        const historicalUrl = `https://api.frankfurter.app/${date}?from=${sourceCurrency}&to=${targetCurrency}`;
+        const historicalUrl = `${exchangeRatesUrl}/${date}?from=${sourceCurrency}&to=${targetCurrency}`;
         console.log('Fetching from API:', historicalUrl);
 
-        const response = await fetch(historicalUrl);
+        const apiKey = process.env.CURRENCY_API_KEY;
+        const fetchOptions = apiKey ? { headers: { 'Authorization': `Bearer ${apiKey}` } } : {};
+        const response = await fetch(historicalUrl, fetchOptions);
         const data = await response.json();
 
         console.log('API Response:', {
@@ -161,8 +164,11 @@ app.post('/api/update-rates', async (req, res) => {
         const ourCurrencies = db.currencies.map(c => c.code);
 
         // Fetch rates from Frankfurter API for the specified date
-        const response = await fetch(`https://api.frankfurter.app/${date}?from=USD`);
-        const data = await response.json();
+        const apiKey = process.env.CURRENCY_API_KEY;
+        const updateRatesUrl = `${exchangeRatesUrl}/${date}?from=USD`;
+        const fetchOptions = apiKey ? { headers: { 'Authorization': `Bearer ${apiKey}` } } : {};
+        const updateRatesResponse = await fetch(updateRatesUrl, fetchOptions);
+        const data = await updateRatesResponse.json();
 
         if (!data.rates) {
             console.error('No rates received from API');
@@ -177,9 +183,17 @@ app.post('/api/update-rates', async (req, res) => {
 
         // Then add other currencies
         ourCurrencies.forEach(currency => {
-            if (currency !== 'USD' && data.rates[currency]) {
+            if (currency === 'USD') return;
+            if (data.rates[currency]) {
                 // Invert the rate: if 1 USD = X currency, then 1 currency = 1/X USD
                 filteredRates[currency] = 1 / data.rates[currency];
+            } else if (db.rates && db.rates[currency]) {
+                // Fallback to last known rate if API does not provide it
+                filteredRates[currency] = db.rates[currency];
+                console.warn(`No rate for ${currency} from API, using last known rate: ${db.rates[currency]}`);
+            } else {
+                // If no previous rate, skip (will be undefined)
+                console.warn(`No rate for ${currency} from API and no previous rate available.`);
             }
         });
 
@@ -215,4 +229,4 @@ app.post('/api/update-rates', async (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-}); 
+});

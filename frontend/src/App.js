@@ -23,6 +23,7 @@ function App() {
         fetchCurrencies();
     }, []);
 
+    //Get the currencies from the API
     const fetchCurrencies = async () => {
         try {
             const response = await fetch('http://localhost:5000/api/currencies');
@@ -33,6 +34,7 @@ function App() {
         }
     };
 
+    //Get the history from the API
     const fetchHistory = async () => {
         try {
             const response = await fetch('http://localhost:5000/api/history');
@@ -198,7 +200,7 @@ function App() {
         );
     }
 
-    // Update Rates mode
+    // Update Rates 
     if (mode === 'updateRates') {
         return (
             <div className="App">
@@ -490,7 +492,7 @@ function App() {
                                         </td>
                                         <td style={{ padding: '4px' }}>
                                             {item.type === 'single' && item.result.convertedAmount !== undefined && (
-                                                <span>{typeof item.result.convertedAmount === 'number' ? item.result.convertedAmount.toFixed(10) : 'N/A'}</span>
+                                                <span>{typeof item.result.convertedAmount === 'number' ? item.result.convertedAmount.toFixed(20) : 'N/A'}</span>
                                             )}
                                             {item.type === 'all' && Array.isArray(item.result) && (
                                                 <div className="history-multiline-result">
