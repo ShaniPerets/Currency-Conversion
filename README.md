@@ -103,6 +103,24 @@ Additionally, data is retrieved dynamically from external APIs as needed.
 The JSON files serve as a local storage mechanism for static or semi-static data,
 while API calls fetch real-time or updated information.
 
+## User Interface
+The main page includes 5 core features:
+
+- Convert a Single Currency
+A form where the user selects a source currency, target currency, and amount. The application returns the converted value based on rates stored in the JSON file.
+
+- Convert to All Currencies
+The user enters an amount and a source currency. The application displays a table showing the equivalent value of the amount in all other currencies, using the JSON file data.
+
+- Conversion by Historical Rates
+The user selects a date, source currency, target currency, and amount. The app fetches the historical exchange rate from an API and returns the converted amount based on the selected date.
+
+- View Conversion History
+Displays a list of all conversions previously performed by the user. This data is retrieved from the local JSON file.
+
+- Update Rates by Date
+Allows the user to select a date and update currency rates accordingly. The rates are fetched from an external API based on the chosen date.
+
 ## What I Would Improve/Add With More Time
 ✅ User Authentication – Support user accounts and private history per user
 
