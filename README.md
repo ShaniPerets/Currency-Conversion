@@ -96,6 +96,12 @@ The following endpoints require an API key for the exchange rate provider:
 
 All endpoints accept and return data in JSON format.
 
+## storage method
+
+The data is stored primarily in JSON files for easy readability and maintainability.
+Additionally, data is retrieved dynamically from external APIs as needed.
+The JSON files serve as a local storage mechanism for static or semi-static data,
+while API calls fetch real-time or updated information.
 
 ## What I Would Improve/Add With More Time
 ✅ User Authentication – Support user accounts and private history per user
