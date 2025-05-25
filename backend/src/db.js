@@ -18,7 +18,7 @@ function getCurrencies(cb) {
 
 function getHistory(cb) {
     const db = readDB();
-    cb(null, db.history.slice().reverse().slice(0, 50));
+    cb(null, db.history.slice().reverse().slice(0, 20));
 }
 
 function saveToHistory(entry, cb) {
@@ -73,10 +73,26 @@ function convertToAll(amount, sourceCurrency, cb) {
     cb(null, results);
 }
 
+function updateRates(newRates) {
+    const db = readDB();
+    // Only update rates for currencies present in db.currencies
+    db.rates = db.currencies.reduce((acc, curr) => {
+        if (newRates[curr.code]) {
+            acc[curr.code] = newRates[curr.code];
+        } else if (curr.code === 'USD') {
+            acc[curr.code] = 1; // USD base
+        }
+        return acc;
+    }, {});
+    writeDB(db);
+    return db.rates;
+}
+
 module.exports = {
     getCurrencies,
     convertCurrency,
     convertToAll,
     saveToHistory,
-    getHistory
+    getHistory,
+    updateRates
 }; 

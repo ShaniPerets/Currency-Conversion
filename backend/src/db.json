@@ -185,6 +185,50 @@
           "convertedAmount": 90.9090909090909
         }
       ]
+    },
+    {
+      "id": 1748157083253,
+      "timestamp": "2025-05-25T07:11:14.522Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "ILS",
+      "result": {
+        "convertedAmount": 370.3703703703703
+      }
+    },
+    {
+      "id": 1748157290511,
+      "timestamp": "2025-05-25T07:14:47.255Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "ILS",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 24.545454545454547
+      }
+    },
+    {
+      "id": 1748157518484,
+      "timestamp": "2025-05-25T07:18:36.398Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 90.9090909090909
+      }
+    },
+    {
+      "id": 1748158135916,
+      "timestamp": "2025-05-25T07:28:54.549Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 90.9090909090909
+      }
     }
   ]
 }
