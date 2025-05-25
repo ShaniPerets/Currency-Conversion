@@ -72,7 +72,7 @@ The application will be available at:
 - Environment variable configuration
 - Development hot-reloading 
 
-API Design (RESTful)
+## API Design (RESTful)
 The backend exposes several endpoints for currency-related operations:
 
 ```GET /api/currencies``` List all supported currencies
@@ -96,7 +96,7 @@ The following endpoints require an API key for the exchange rate provider:
 
 All endpoints accept and return data in JSON format.
 
-## storage method
+## Storage Method
 
 The data is stored primarily in JSON files for easy readability and maintainability.
 Additionally, data is retrieved dynamically from external APIs as needed.
