@@ -55,18 +55,18 @@
   ],
   "rates": {
     "USD": 1,
-    "EUR": 1.1300967362806256,
-    "GBP": 1.3482540110556829,
-    "ILS": 0.2760981805129904,
-    "JPY": 0.007013606396409033,
-    "BRL": 0.17461148943600488,
-    "CAD": 0.7230135203528306,
-    "AUD": 0.6432522835456066,
-    "CHF": 1.2152883271556176,
-    "INR": 0.011705489874751257,
-    "CNY": 0.1391807819176328,
-    "SGD": 0.7764577995185962,
-    "ZAR": 0.05560158130897243
+    "EUR": 1.1419044682721844,
+    "GBP": 1.3539311390622673,
+    "ILS": 0.2845193046348195,
+    "JPY": 0.007006235549639179,
+    "BRL": 0.1756358016017985,
+    "CAD": 0.7299802905321557,
+    "AUD": 0.6485925541574783,
+    "CHF": 1.223121896328188,
+    "INR": 0.01171234481143125,
+    "CNY": 0.13889274702075058,
+    "SGD": 0.7775445144234507,
+    "ZAR": 0.055775870243015474
   },
   "history": [
     {
@@ -2323,6 +2323,352 @@
           "targetCurrency": "ZAR",
           "targetName": "South African Rand",
           "convertedAmount": 496.56533863441837
+        }
+      ]
+    },
+    {
+      "id": 1748181393550,
+      "timestamp": "2025-05-25T13:56:30.686Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 88.488
+      }
+    },
+    {
+      "id": 1748181411290,
+      "timestamp": "2025-05-25T13:56:44.284Z",
+      "type": "all",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": null,
+      "result": [
+        {
+          "targetCurrency": "EUR",
+          "targetName": "Euro",
+          "convertedAmount": 88.488
+        },
+        {
+          "targetCurrency": "GBP",
+          "targetName": "British Pound",
+          "convertedAmount": 74.17
+        },
+        {
+          "targetCurrency": "ILS",
+          "targetName": "Israeli Shekel",
+          "convertedAmount": 362.19
+        },
+        {
+          "targetCurrency": "JPY",
+          "targetName": "Japanese Yen",
+          "convertedAmount": 14258.000000000002
+        },
+        {
+          "targetCurrency": "BRL",
+          "targetName": "Brazilian Real",
+          "convertedAmount": 572.7
+        },
+        {
+          "targetCurrency": "CAD",
+          "targetName": "Canadian Dollar",
+          "convertedAmount": 138.31
+        },
+        {
+          "targetCurrency": "AUD",
+          "targetName": "Australian Dollar",
+          "convertedAmount": 155.46
+        },
+        {
+          "targetCurrency": "CHF",
+          "targetName": "Swiss Franc",
+          "convertedAmount": 82.28500000000001
+        },
+        {
+          "targetCurrency": "INR",
+          "targetName": "Indian Rupee",
+          "convertedAmount": 8543
+        },
+        {
+          "targetCurrency": "CNY",
+          "targetName": "Chinese Yuan",
+          "convertedAmount": 718.4900000000001
+        },
+        {
+          "targetCurrency": "SGD",
+          "targetName": "Singapore Dollar",
+          "convertedAmount": 128.79
+        },
+        {
+          "targetCurrency": "ZAR",
+          "targetName": "South African Rand",
+          "convertedAmount": 1798.51
+        }
+      ]
+    },
+    {
+      "id": 1748182766676,
+      "timestamp": "2025-05-25T14:19:17.325Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 88.488
+      }
+    },
+    {
+      "id": 1748182768954,
+      "timestamp": "2025-05-25T14:19:25.855Z",
+      "type": "all",
+      "amount": 21,
+      "sourceCurrency": "USD",
+      "targetCurrency": null,
+      "result": [
+        {
+          "targetCurrency": "EUR",
+          "targetName": "Euro",
+          "convertedAmount": 18.58248
+        },
+        {
+          "targetCurrency": "GBP",
+          "targetName": "British Pound",
+          "convertedAmount": 15.575700000000001
+        },
+        {
+          "targetCurrency": "ILS",
+          "targetName": "Israeli Shekel",
+          "convertedAmount": 76.0599
+        },
+        {
+          "targetCurrency": "JPY",
+          "targetName": "Japanese Yen",
+          "convertedAmount": 2994.1800000000003
+        },
+        {
+          "targetCurrency": "BRL",
+          "targetName": "Brazilian Real",
+          "convertedAmount": 120.26700000000001
+        },
+        {
+          "targetCurrency": "CAD",
+          "targetName": "Canadian Dollar",
+          "convertedAmount": 29.0451
+        },
+        {
+          "targetCurrency": "AUD",
+          "targetName": "Australian Dollar",
+          "convertedAmount": 32.6466
+        },
+        {
+          "targetCurrency": "CHF",
+          "targetName": "Swiss Franc",
+          "convertedAmount": 17.279850000000003
+        },
+        {
+          "targetCurrency": "INR",
+          "targetName": "Indian Rupee",
+          "convertedAmount": 1794.0300000000002
+        },
+        {
+          "targetCurrency": "CNY",
+          "targetName": "Chinese Yuan",
+          "convertedAmount": 150.8829
+        },
+        {
+          "targetCurrency": "SGD",
+          "targetName": "Singapore Dollar",
+          "convertedAmount": 27.0459
+        },
+        {
+          "targetCurrency": "ZAR",
+          "targetName": "South African Rand",
+          "convertedAmount": 377.6871
+        }
+      ]
+    },
+    {
+      "id": 1748891290725,
+      "timestamp": "2025-06-02T19:08:04.778Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 88.488
+      }
+    },
+    {
+      "id": 1748891309492,
+      "timestamp": "2025-06-02T19:08:28.732Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 87.57300000000001
+      }
+    },
+    {
+      "id": 1748891325975,
+      "timestamp": "2025-06-02T19:08:38.969Z",
+      "type": "all",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": null,
+      "result": [
+        {
+          "targetCurrency": "EUR",
+          "targetName": "Euro",
+          "convertedAmount": 87.57300000000001
+        },
+        {
+          "targetCurrency": "GBP",
+          "targetName": "British Pound",
+          "convertedAmount": 73.859
+        },
+        {
+          "targetCurrency": "ILS",
+          "targetName": "Israeli Shekel",
+          "convertedAmount": 351.46999999999997
+        },
+        {
+          "targetCurrency": "JPY",
+          "targetName": "Japanese Yen",
+          "convertedAmount": 14272.999999999998
+        },
+        {
+          "targetCurrency": "BRL",
+          "targetName": "Brazilian Real",
+          "convertedAmount": 569.36
+        },
+        {
+          "targetCurrency": "CAD",
+          "targetName": "Canadian Dollar",
+          "convertedAmount": 136.98999999999998
+        },
+        {
+          "targetCurrency": "AUD",
+          "targetName": "Australian Dollar",
+          "convertedAmount": 154.17999999999998
+        },
+        {
+          "targetCurrency": "CHF",
+          "targetName": "Swiss Franc",
+          "convertedAmount": 81.75800000000001
+        },
+        {
+          "targetCurrency": "INR",
+          "targetName": "Indian Rupee",
+          "convertedAmount": 8538
+        },
+        {
+          "targetCurrency": "CNY",
+          "targetName": "Chinese Yuan",
+          "convertedAmount": 719.98
+        },
+        {
+          "targetCurrency": "SGD",
+          "targetName": "Singapore Dollar",
+          "convertedAmount": 128.61
+        },
+        {
+          "targetCurrency": "ZAR",
+          "targetName": "South African Rand",
+          "convertedAmount": 1792.8899999999999
+        }
+      ]
+    },
+    {
+      "id": 1748892623991,
+      "timestamp": "2025-06-02T19:30:14.430Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 87.57300000000001
+      }
+    },
+    {
+      "id": 1748895693734,
+      "timestamp": "2025-06-02T20:21:23.910Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 87.57300000000001
+      }
+    },
+    {
+      "id": 1748895695492,
+      "timestamp": "2025-06-02T20:21:32.792Z",
+      "type": "all",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": null,
+      "result": [
+        {
+          "targetCurrency": "EUR",
+          "targetName": "Euro",
+          "convertedAmount": 87.57300000000001
+        },
+        {
+          "targetCurrency": "GBP",
+          "targetName": "British Pound",
+          "convertedAmount": 73.859
+        },
+        {
+          "targetCurrency": "ILS",
+          "targetName": "Israeli Shekel",
+          "convertedAmount": 351.46999999999997
+        },
+        {
+          "targetCurrency": "JPY",
+          "targetName": "Japanese Yen",
+          "convertedAmount": 14272.999999999998
+        },
+        {
+          "targetCurrency": "BRL",
+          "targetName": "Brazilian Real",
+          "convertedAmount": 569.36
+        },
+        {
+          "targetCurrency": "CAD",
+          "targetName": "Canadian Dollar",
+          "convertedAmount": 136.98999999999998
+        },
+        {
+          "targetCurrency": "AUD",
+          "targetName": "Australian Dollar",
+          "convertedAmount": 154.17999999999998
+        },
+        {
+          "targetCurrency": "CHF",
+          "targetName": "Swiss Franc",
+          "convertedAmount": 81.75800000000001
+        },
+        {
+          "targetCurrency": "INR",
+          "targetName": "Indian Rupee",
+          "convertedAmount": 8538
+        },
+        {
+          "targetCurrency": "CNY",
+          "targetName": "Chinese Yuan",
+          "convertedAmount": 719.98
+        },
+        {
+          "targetCurrency": "SGD",
+          "targetName": "Singapore Dollar",
+          "convertedAmount": 128.61
+        },
+        {
+          "targetCurrency": "ZAR",
+          "targetName": "South African Rand",
+          "convertedAmount": 1792.8899999999999
         }
       ]
     }

@@ -79,7 +79,7 @@ app.get('/api/history', (req, res) => {
 app.post('/api/convert-historical', async (req, res) => {
     try {
         const { amount, sourceCurrency, targetCurrency, date } = req.body;
-
+    
         console.log('Historical conversion request:', { amount, sourceCurrency, targetCurrency, date });
 
         if (!amount || !sourceCurrency || !targetCurrency || !date) {
@@ -98,8 +98,7 @@ app.post('/api/convert-historical', async (req, res) => {
         const historicalUrl = `${exchangeRatesUrl}/${date}?from=${sourceCurrency}&to=${targetCurrency}`;
         console.log('Fetching from API:', historicalUrl);
 
-        const apiKey = process.env.CURRENCY_API_KEY;
-        const fetchOptions = apiKey ? { headers: { 'Authorization': `Bearer ${apiKey}` } } : {};
+        const fetchOptions = {};
         const response = await fetch(historicalUrl, fetchOptions);
         const data = await response.json();
 
@@ -119,7 +118,7 @@ app.post('/api/convert-historical', async (req, res) => {
         }
 
         const rate = data.rates[targetCurrency];
-        const convertedAmount = amount * rate;
+        const convertedAmount = amount * rate; //regular cause took the rate from the API
 
         console.log('Conversion result:', {
             amount,
@@ -155,22 +154,22 @@ app.post('/api/update-rates', async (req, res) => {
             return res.status(400).json({ error: 'Date is required' });
         }
 
-        // Validate date format (YYYY-MM-DD)
+       // validate date format (YYYY-MM-DD)
         const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
         if (!dateRegex.test(date)) {
-            return res.status(400).json({ error: 'Invalid date format. Use YYYY-MM-DD' });
+            console.log('Invalid date format:', date);
+            return res.status(400).json({ error: 'Invalid date format' });
         }
 
-        console.log(`Starting rate update for ${date}...`);
+        console.log(`Starting rate update for ${date}...`);//debugging
 
         // get current database state
         const db = readDB();
         const ourCurrencies = db.currencies.map(c => c.code);
 
         // getting rates from Frankfurter API for the specified date
-        const apiKey = process.env.CURRENCY_API_KEY;
         const updateRatesUrl = `${exchangeRatesUrl}/${date}?from=USD`;
-        const fetchOptions = apiKey ? { headers: { 'Authorization': `Bearer ${apiKey}` } } : {};
+        const fetchOptions = {};
         const updateRatesResponse = await fetch(updateRatesUrl, fetchOptions);
         const data = await updateRatesResponse.json();
 

@@ -35,7 +35,9 @@ function HistoricalConversionForm({
             const data = await response.json();
             if (response.ok) {
                 setHistoricalResult(data);
+                setTimeout(() => {
                 setAmount('');
+                }, 7000);
                 setHistoricalDate('');
             } else {
                 let errorMessage = data.error || 'Historical conversion failed';

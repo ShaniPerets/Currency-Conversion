@@ -47,7 +47,7 @@ function convertCurrency(amount, sourceCurrency, targetCurrency, cb) {
         return cb(new Error('Currency rates not found'));
     }
     //calculating the conversion rate according the rate of the source and target currencies to dollar
-    const converted = amount * (sourceRate / targetRate);
+    const converted = amount * (sourceRate / targetRate); // 100 ILS to EUR = 100*(0.28/1.13)=24....
     saveToHistory({
         type: 'single',
         amount,
@@ -86,14 +86,14 @@ function convertToAll(amount, sourceCurrency, cb) {
 function updateRates(newRates) {
     const db = readDB();
     // Only update rates for currencies present in db.currencies
-    db.rates = db.currencies.reduce((acc, curr) => {
+    db.rates = db.currencies.reduce((newRatesArray, curr) => {
         if (curr.code === 'USD') {
-            acc[curr.code] = 1; // Always set USD to 1
+            newRatesArray[curr.code] = 1; // Always set USD to 1
         } else if (newRates[curr.code]) {
             //getting the oposite rate of the currency to dollar
-            acc[curr.code] = 1 / newRates[curr.code];
+            newRatesArray[curr.code] = 1 / newRates[curr.code];
         }
-        return acc;
+        return newRatesArray;
     }, {});
     writeDB(db);
     return db.rates;
