@@ -26,11 +26,9 @@ app.get('/api/currencies', (req, res) => {
 //single conversion endpoint
 app.post('/api/convert', (req, res) => {
     const { amount, sourceCurrency, targetCurrency } = req.body;
-
     if (!amount || !sourceCurrency || !targetCurrency) {
         return res.status(400).json({ error: 'Missing parameters' });
     }
-
     convertCurrency(parseFloat(amount), sourceCurrency, targetCurrency, (err, convertedAmount) => {
         if (err) {
             res.status(500).json({ error: err.message });

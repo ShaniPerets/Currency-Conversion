@@ -2671,6 +2671,17 @@
           "convertedAmount": 1792.8899999999999
         }
       ]
+    },
+    {
+      "id": 1748896296298,
+      "timestamp": "2025-06-02T20:31:27.234Z",
+      "type": "single",
+      "amount": 100,
+      "sourceCurrency": "USD",
+      "targetCurrency": "EUR",
+      "result": {
+        "convertedAmount": 87.57300000000001
+      }
     }
   ]
 }

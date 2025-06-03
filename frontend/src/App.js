@@ -158,7 +158,6 @@ function App() {
                     &larr; Back
                 </button>
                 <h1>Currency Conversion</h1>
-                
             </div>
         </div>
     );
